@@ -28,9 +28,19 @@
               "src/assets"
             ],
             "styles": [
+              "src/custom-theme.scss",
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/angular/angular.js",
+              "node_modules/angular-aria/angular-aria.js",
+              "node_modules/angular-messages/angular-messages.js",
+              "node_modules/jquery/dist/jquery.slim.js",
+              "node_modules/popper.js/dist/umd/popper.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -124,5 +134,8 @@
       }
     }
   },
-  "defaultProject": "Myproject"
+  "defaultProject": "Myproject",
+  "cli": {
+    "analytics": "42f26e17-a0a9-4638-8c75-fd879184ac2a"
+  }
 }
