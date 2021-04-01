@@ -7,7 +7,7 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 
 // db credentials
 define('DB_HOST', 'localhost');
-define('DB_USER', 'dear');
+define('DB_USER', 'root');
 define('DB_PASS', 'db1997');
 
 // Connect with the database.
