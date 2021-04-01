@@ -1,10 +1,10 @@
 <?php
-header('Content-Type: application/json; charset=UTF-8');
-header('Access-Control-Allow-Origin: *'); 
-header('Access-Control-Allow-Credentials: true');
-header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-header('Access-Control-Allow-Headers: Authorization, Role, Id, Language, Content-Type');
-    //echo "hello";
+	header('Content-Type: application/json; charset=UTF-8');
+    header('Access-Control-Allow-Origin: *'); 
+    header('Access-Control-Allow-Credentials: true');
+    header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+    header('Access-Control-Allow-Headers: Authorization, Role, Id, Language, Content-Type');
+ 
     $data_return =array();
     $arraydata = array(
         "id"=>1,
