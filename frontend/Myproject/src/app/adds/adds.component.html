@@ -1,41 +1,50 @@
-<form [formGroup]="cateForm" class="container mt-3">
-    <mat-card>
-      <h1>เพิ่มรายรับ-รายจ่าย</h1>
-      <div>
-        <div class="form">
-          <div class="form-group">
-            <h2>เพิ่มรายการ</h2>
-            <mat-form-field appearance="outline" style="width: 20%;">
-              <mat-select (selectionChange) ="toogleTag( )">
-                <mat-option selected="">กรุณาเลือก</mat-option>
-                <mat-option *ngFor="let i of select" [value]="i.id">
-                  {{i.name}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field><br>
-          </div>
-          <div >
-            <div class="form-group" *ngIf="showhide">
-              <mat-form-field appearance="outline" style="width: 10%;" >
-                <mat-select >
-                  <mat-option selected="">กรุณาเลือก</mat-option>
-                  <mat-option value="">เครืองดืม</mat-option>
-                  <mat-option value="">อาหาร</mat-option>
-                  <mat-option value="">เสื้อผ้า</mat-option>
-                </mat-select>
-              </mat-form-field>
-              <mat-form-field appearance="outline" style="width: 50%;">
-                <input matInput >
-              </mat-form-field>
-              <mat-form-field appearance="outline" style="width: 20%;">
-                <input matInput >
-              </mat-form-field>
-              <button button type="button" class="btn btn-primary mb-2" (click)="addCategory">add</button>
-            </div>
-          </div>
+<form [formGroup]="cateForm" class="container mt-3" (ngSubmit)="save()">
+  <div formArrayName="cateList">
+    <h3>รายรับ รายจ่าย</h3>
+
+    <mat-form-field appearance="outline">
+      <mat-select (selectionChange)="toogle()">
+        <mat-option *ngFor="let i of data" [value]="i.id">{{i.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div>
+
+
+      <div *ngFor="let L of List.controls; let i=index">
+        รายการที่ {{i+1}}
+        <div class="form-container" *ngIf="showhide">
+
+          <mat-form-field appearance="outline">
+            <input matInput [matDatepicker]="picker2" [formControl]="serializedDate">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="flex-50">
+            <mat-select formControlName="typeitem" placeholder='ประเภท'>
+              <mat-option [value]="1">เครื่องดืม</mat-option>
+              <mat-option [value]="2">เสื้อผ้า</mat-option>
+              <mat-option [value]="3">อาหาร</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="flex-50">
+            <input matInput formControlName="listname" placeholder='รายการ'>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="flex-50">
+            <input matInput formControlName="price" placeholder='ราคา'>
+          </mat-form-field>
+
+          <mat-icon type="button" color="warn" class="material-icons" (click)="remove(i)">delete</mat-icon>
+
         </div>
-        <br>
-        <button button type="button" class="btn btn-primary mb-2">บันทึก</button>
       </div>
-    </mat-card>
-  </form>
+    </div>
+  </div>
+  <button color="#ffeb3b" class="material-icons btn" (click)="add()">เพิ่มรายการ add_box</button>
+  <div>
+    <button class="btn btn-primary mb-2" type="submit">Save</button>
+  </div>
+
+</form>

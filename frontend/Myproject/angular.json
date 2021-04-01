@@ -36,6 +36,7 @@
             "scripts": [
               "node_modules/angular/angular.js",
               "node_modules/angular-aria/angular-aria.js",
+              "node_modules/angular-animate/angular-animate.js",
               "node_modules/angular-messages/angular-messages.js",
               "node_modules/jquery/dist/jquery.slim.js",
               "node_modules/popper.js/dist/umd/popper.js",

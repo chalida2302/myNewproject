@@ -8,7 +8,7 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 // db credentials
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', 'dear1234');
+define('DB_PASS', 'db1997');
 define('DB_NAME', 'db_myprojectmoney');
 // Connect with the database.
 function connect()

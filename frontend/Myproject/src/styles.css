@@ -3,4 +3,12 @@
 body {
     min-height: 75rem;
     padding-top: 4.5rem;
+   
   }
+html, body { height: 100%; }
+body { margin: 0;
+       font-family: Roboto, "Helvetica Neue", sans-serif;
+       background-color: #fff59d; }
+mat-card {
+  background-color: #fff59d;
+}

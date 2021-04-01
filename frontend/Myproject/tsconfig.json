@@ -15,15 +15,15 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2015",
-    "module": "es2020",
+    "target": "ES2016",
+    "module": "ES2020",
     "lib": [
-      "es2018",
+      "ES2018",
       "dom"
     ]
   },
   "angularCompilerOptions": {
-    "strictInjectionParameters": true,
+    "strictInjectionParameters": false,
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
     "enableIvy": false

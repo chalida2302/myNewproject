@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ApiService } from '../api.service';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
+
 
 @Component({
   selector: 'app-adds',
@@ -8,28 +11,66 @@ import { ApiService } from '../api.service';
   styleUrls: ['./adds.component.css']
 })
 export class AddsComponent implements OnInit {
-  showhide= false
-  response:any
-  data=[]
-  cateForm = new FormBuilder;
-  constructor(private apiervice: ApiService,private fb:FormBuilder) { }
-  select=[{id:'1',name:"รายรับ"},{id:'2',name:"รายจ่าย"}
-]
-  ngOnInit(): void {
-    this.get()
-  }
-  get(){
-    // this.apiervice.getData().subscribe(()=>{
-    //   this.response = this.data;
-    //   console.log(this.data);
-    // })
-  }
+  // name = 'Angular';
+  showhide=false
+  savedData=[];
+  serializedDate = new FormControl((new Date()).toISOString());
+  typecontrol:any;
+  response=[];
+  data: [] = [];
+    cateForm: FormGroup;
+      constructor(private fb: FormBuilder,private http: HttpClient) {
+        this.cateForm = this.fb.group({
+          cateList: this.fb.array([])
+        });
+        this.add();
+       
+      }
+     
+      getData(): Observable<any>{
+        // return this.http.get<any>(`${this.PHP_API_SERVER}/api/type.php`);
+        return this.http.post<any>('http://localhost/backend/api/type.php', []);
+      }
+      ngOnInit() {
+      this.getData().subscribe(
+        (res)=>{
+          this.data = res
+        console.log(this.data)
+      },
+        (err)=>{
 
-  toogleTag(){
-    this.showhide =! this.showhide
-
-  }
-  addCategory(){
-
-  }
-}
+        });
+    }
+   
+      
+    
+  
+      toogle(){
+        this.typecontrol=this.showhide
+        this.showhide=true
+      }
+      get List() {
+        return this.cateForm.get("cateList") as FormArray;
+      }
+      add() {
+        this.List.push(this.create());
+      }
+    
+      remove(i: number) {
+        this.List.removeAt(i);
+      }
+      
+      save() {
+        this.savedData = this.cateForm.value;
+      }
+    
+      create() {
+        return this.fb.group({
+          date: [],
+          typeitem: [],
+          listname: [],
+          price: []
+        
+        });
+      }
+    }

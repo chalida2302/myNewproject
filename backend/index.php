@@ -6,7 +6,7 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 
 $localhost = "127.0.0.1"; 
 $username = "root"; 
-$password = "dear1234"; 
+$password = "db1997"; 
 $dbname = "db_myprojectmoney";
 
 
