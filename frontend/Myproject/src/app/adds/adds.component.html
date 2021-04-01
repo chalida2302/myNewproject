@@ -9,7 +9,6 @@
     </mat-form-field>
     <div>
 
-
       <div *ngFor="let L of List.controls; let i=index">
         รายการที่ {{i+1}}
         <div class="form-container" *ngIf="showhide">
@@ -44,7 +43,7 @@
   </div>
   <button color="#ffeb3b" class="material-icons btn" (click)="add()">เพิ่มรายการ add_box</button>
   <div>
-    <button class="btn btn-primary mb-2" type="submit">Save</button>
+    <button class="btn btn-primary mb-2" type="submit">บันทึก</button>
   </div>
 
 </form>

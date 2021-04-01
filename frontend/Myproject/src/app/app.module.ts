@@ -21,6 +21,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AddtypnameComponent } from './addtypname/addtypname.component';
+import { ViewComponent } from './view/view.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AddtypnameComponent } from './addtypname/addtypname.component';
     AddsComponent,
     HeaderComponent,
     HomeComponent,
-    AddtypnameComponent
+    AddtypnameComponent,
+    ViewComponent
   ],
   imports: [
     BrowserModule,
