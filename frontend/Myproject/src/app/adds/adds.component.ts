@@ -18,6 +18,7 @@ export class AddsComponent implements OnInit {
   typecontrol:any;
   response=[];
   data: [] = [];
+  dataType: [] = [];
     cateForm: FormGroup;
       constructor(private fb: FormBuilder,private http: HttpClient) {
         this.cateForm = this.fb.group({
@@ -28,19 +29,36 @@ export class AddsComponent implements OnInit {
       }
      
       getData(): Observable<any>{
-        // return this.http.get<any>(`${this.PHP_API_SERVER}/api/type.php`);
         return this.http.post<any>('http://localhost/backend/api/type.php', []);
       }
+      getTypeinc(): Observable<any>{
+        return this.http.post<any>('http://localhost//backend/api/readinc.php', []);
+      }
       ngOnInit() {
-      this.getData().subscribe(
-        (res)=>{
-          this.data = res
-        console.log(this.data)
-      },
-        (err)=>{
-
-        });
-    }
+        this.getsel();
+        this.getType();
+      }
+      getsel(){
+        this.getData().subscribe(
+          (res)=>{
+            this.data = res
+          console.log(this.data)
+        },
+          (err)=>{
+  
+          });
+      }
+      getType(){
+        this.getTypeinc().subscribe(
+          (res)=>{
+            // res = JSON.parse(JSON.stringify(res))
+            this.dataType = res
+          console.log(res)
+        },
+          (err)=>{
+            console.log(err)
+          });
+      }
    
       
     
@@ -66,10 +84,11 @@ export class AddsComponent implements OnInit {
     
       create() {
         return this.fb.group({
-          date: [],
+          // date: [],
           typeitem: [],
           listname: [],
-          price: []
+          price: [],
+          serializedDate:[]
         
         });
       }

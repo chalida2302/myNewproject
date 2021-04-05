@@ -12,7 +12,6 @@
       <div *ngFor="let L of List.controls; let i=index">
         รายการที่ {{i+1}}
         <div class="form-container" *ngIf="showhide">
-
           <mat-form-field appearance="outline">
             <input matInput [matDatepicker]="picker2" [formControl]="serializedDate">
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
@@ -21,9 +20,7 @@
 
           <mat-form-field appearance="outline" class="flex-50">
             <mat-select formControlName="typeitem" placeholder='ประเภท'>
-              <mat-option [value]="1">เครื่องดืม</mat-option>
-              <mat-option [value]="2">เสื้อผ้า</mat-option>
-              <mat-option [value]="3">อาหาร</mat-option>
+              <mat-option *ngFor="let i of dataType" [value]="i.idmsin ">{{i.namemsin}}</mat-option>
             </mat-select>
           </mat-form-field>
 
