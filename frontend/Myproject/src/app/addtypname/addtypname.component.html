@@ -3,8 +3,8 @@
   <div>
     <mat-label>เลือก</mat-label>
     <mat-form-field appearance="outline">
-      <mat-select>
-        
+      <mat-select [(value)]="type" name="typename" required="" >
+        <mat-option *ngFor="let i of data" [value]="i.id">{{i.name}}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -11,85 +11,109 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./adds.component.css']
 })
 export class AddsComponent implements OnInit {
-  // name = 'Angular';
-  showhide=false
-  savedData=[];
+  showhide = false
+  savedData = [];
   serializedDate = new FormControl((new Date()).toISOString());
-  typecontrol:any;
-  response=[];
-  data: [] = [];
+  listtype = new FormControl;
+  listname  = new FormControl;
+  listprice  = new FormControl;
+  type = ""
+  typename: any
+  typecontrol: any;
+  response = [];
+  data = [];
   dataType: [] = [];
-    cateForm: FormGroup;
-      constructor(private fb: FormBuilder,private http: HttpClient) {
-        this.cateForm = this.fb.group({
-          cateList: this.fb.array([])
-        });
-        this.add();
-       
-      }
-     
-      getData(): Observable<any>{
-        return this.http.post<any>('http://localhost/backend/api/type.php', []);
-      }
-      getTypeinc(): Observable<any>{
-        return this.http.post<any>('http://localhost//backend/api/readinc.php', []);
-      }
-      ngOnInit() {
-        this.getsel();
-        this.getType();
-      }
-      getsel(){
-        this.getData().subscribe(
-          (res)=>{
-            this.data = res
-          console.log(this.data)
-        },
-          (err)=>{
-  
-          });
-      }
-      getType(){
-        this.getTypeinc().subscribe(
-          (res)=>{
-            // res = JSON.parse(JSON.stringify(res))
-            this.dataType = res
-          console.log(res)
-        },
-          (err)=>{
-            console.log(err)
-          });
-      }
-   
-      
+  datapay: [] = [];
+  datax: [] = [];
+  creaetForm: FormGroup;
+  constructor(private fb: FormBuilder, private http: HttpClient) {
+    this.creaetForm = this.fb.group({
+      creaetList: this.fb.array([ 
+      ])
+    });
+    this.add();
+  }
+  create(): FormGroup {
+    return this.fb.group({
+      listtype:null,
+      listname:null,
+      listprice:null
+      });
     
-  
-      toogle(){
-        this.typecontrol=this.showhide
-        this.showhide=true
-      }
-      get List() {
-        return this.cateForm.get("cateList") as FormArray;
-      }
-      add() {
-        this.List.push(this.create());
-      }
-    
-      remove(i: number) {
-        this.List.removeAt(i);
-      }
-      
-      save() {
-        this.savedData = this.cateForm.value;
-      }
-    
-      create() {
-        return this.fb.group({
-          // date: [],
-          typeitem: [],
-          listname: [],
-          price: [],
-          serializedDate:[]
-        
-        });
-      }
+  }
+  getData(): Observable<any> {
+    return this.http.post<any>('http://localhost/backend/api/GetTypeOutput.php', []);
+  }
+  getTypeinc(): Observable<any> {
+    return this.http.post<any>('http://localhost//backend/api/GetMaterTypeincOutput.php', []);
+
+  }
+  getTypepay(): Observable<any> {
+    return this.http.post<any>('http://localhost//backend/api/GetMaterTypepayOutput.php', []);
+  }
+
+  ngOnInit() {
+    this.getsel();
+    this.getTypei();
+    this.getTypep();
+    this.creaetForm.get('listtype')?.setValue('null')
+
+  }
+
+  getsel() {
+    this.getData().subscribe(
+      (res) => {
+        this.data = res
+        console.log(this.data)
+      },
+      (err) => {
+
+      });
+  }
+  getTypei() {
+    this.getTypeinc().subscribe((res) => {
+      this.dataType = res
+      // console.log(this.dataType)
+    },
+      (err) => {
+        console.log(err)
+      });
+  }
+  getTypep() {
+    this.getTypepay().subscribe(
+      (res) => {
+        this.datapay = res
+        // console.log(this.datapay)
+      },
+      (err) => {
+        console.log(err)
+      });
+  }
+  select() {
+    if (this.type == "1") {
+      this.showhide = true;
+      this.datax= this.dataType 
+      console.log(this.datax)
     }
+    else {
+      this.showhide = true;
+      this.datax = this.datapay
+      console.log(this.datax)
+    }
+  }
+  get Lists() {
+    return this.creaetForm.get("creaetList") as FormArray;
+  }
+  add() {
+    this.Lists.push(this.create());
+  }
+
+  remove(i: number) {
+    this.Lists.removeAt(i);
+  }
+
+  save() {
+    this.savedData = this.creaetForm.value;
+  }
+
+}

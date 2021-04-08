@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-addtypname',
@@ -6,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./addtypname.component.css']
 })
 export class AddtypnameComponent implements OnInit {
-
-  constructor() { }
-
+  type=""
+  data: [] = [];
+  showhide = false
+  constructor(private http: HttpClient) { }
+  getData(): Observable<any> {
+    return this.http.post<any>('http://localhost/backend/api/GetTypeOutput.php', []);
+  }
   ngOnInit(): void {
+  }
+  select(){
+
   }
 
 }

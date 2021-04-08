@@ -1,35 +1,36 @@
-<form [formGroup]="cateForm" class="container mt-3" (ngSubmit)="save()">
-  <div formArrayName="cateList">
+<form [formGroup]="creaetForm" class="container mt-3" (ngSubmit)="save()">
+  <div formArrayName="creaetList">
     <h3>รายรับ รายจ่าย</h3>
 
     <mat-form-field appearance="outline">
-      <mat-select (selectionChange)="toogle()">
+      <mat-select [(value)]="type" name="typename" required="" (selectionChange)="select()">
         <mat-option *ngFor="let i of data" [value]="i.id">{{i.name}}</mat-option>
       </mat-select>
     </mat-form-field>
-    <div>
+    {{type}}
 
-      <div *ngFor="let L of List.controls; let i=index">
+    <div *ngIf="showhide" class="">
+      <div *ngFor="let L of Lists.controls; let i=index">
         รายการที่ {{i+1}}
-        <div class="form-container" *ngIf="showhide">
+        <div class="form-container">
           <mat-form-field appearance="outline">
             <input matInput [matDatepicker]="picker2" [formControl]="serializedDate">
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>
-
-          <mat-form-field appearance="outline" class="flex-50">
-            <mat-select formControlName="typeitem" placeholder='ประเภท'>
-              <mat-option *ngFor="let i of dataType" [value]="i.idmsin ">{{i.namemsin}}</mat-option>
-            </mat-select>
+      
+          <mat-form-field appearance="outline">
+            <mat-select [formControl]="listtype" placeholder='ประเภท'>
+              <mat-option *ngFor="let i of datax" [value]="i.id">{{i.name}}</mat-option>
+            </mat-select>    
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline">
+            <input matInput [formControl]="listname" placeholder='รายการ' appearance="outline">
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="flex-50">
-            <input matInput formControlName="listname" placeholder='รายการ'>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="flex-50">
-            <input matInput formControlName="price" placeholder='ราคา'>
+          <mat-form-field appearance="outline">
+            <input matInput [formControl]="listprice" placeholder='ราคา'>
           </mat-form-field>
 
           <mat-icon type="button" color="warn" class="material-icons" (click)="remove(i)">delete</mat-icon>
@@ -40,7 +41,8 @@
   </div>
   <button color="#ffeb3b" class="material-icons btn" (click)="add()">เพิ่มรายการ add_box</button>
   <div>
-    <button class="btn btn-primary mb-2" type="submit">บันทึก</button>
+    <button class="btn btn-primary mb-2" type="submit" onclick="save()">บันทึก</button>
   </div>
 
 </form>
+{{creaetForm.value|json}}
